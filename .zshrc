@@ -49,3 +49,6 @@ alias todtime="cd ~/Code/Ideas/tod"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+#zsh specific settings
+bindkey -e
+
