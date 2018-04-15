@@ -17,6 +17,7 @@ Plug 'gregsexton/MatchTag', { 'for': ['html', 'javascript.jsx'] }
 Plug 'sheerun/vim-polyglot'
 Plug 'Shougo/deoplete.nvim'
 Plug 'Shougo/neosnippet'
+Plug 'brooth/far.vim'
 Plug 'dyng/ctrlsf.vim'
 Plug 'vimwiki/vimwiki'
 Plug 'christoomey/vim-tmux-navigator'
@@ -368,8 +369,12 @@ nnoremap <Leader>n :NERDTreeToggle<CR>
 nnoremap <leader><tab> <c-^>
 
 " Filesearch plugin map for searching in whole folder
-nnoremap <Leader>f :call Search()<CR>
-nnoremap <Leader>F :call Search(1)<CR>
+"nnoremap <Leader>f :call Search()<CR>
+"nnoremap <Leader>F :call Search(1)<CR>
+
+nnoremap <Leader>f :Far<CR>
+"nnoremap <Leader>F :call Search(1)<CR>
+
 
 " Toggle buffer list
 nnoremap <C-p> :Files<CR>
