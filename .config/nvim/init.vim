@@ -31,6 +31,7 @@ Plug 'Quramy/tsuquyomi'
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'othree/html5.vim'
 Plug 'othree/yajs.vim'
+Plug 'posva/vim-vue'
 Plug 'mhartington/oceanic-next'
 Plug 'lifepillar/vim-solarized8'
 Plug 'Shougo/vimproc.vim', {
@@ -369,11 +370,8 @@ nnoremap <Leader>n :NERDTreeToggle<CR>
 nnoremap <leader><tab> <c-^>
 
 " Filesearch plugin map for searching in whole folder
-"nnoremap <Leader>f :call Search()<CR>
-"nnoremap <Leader>F :call Search(1)<CR>
-
-nnoremap <Leader>f :Far<CR>
-"nnoremap <Leader>F :call Search(1)<CR>
+nnoremap <Leader>f :call Search()<CR>
+nnoremap <Leader>F :call Search(1)<CR>
 
 
 " Toggle buffer list
@@ -410,6 +408,8 @@ nnoremap <Leader>db :silent w <BAR> :silent %bd <BAR> e#<CR>
 
 " }}}
 " ================ Plugins setups ======================== {{{
+
+let g:vue_disable_pre_processors=1 " slows down all the stupid preprocessors
 
 let g:ctrlsf_auto_close = 0                                                     "Do not close search when file is opened
 let g:ctrlsf_mapping = {'vsplit': 's'}                                          "Mapping for opening search result in vertical split
