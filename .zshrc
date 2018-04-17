@@ -1,4 +1,29 @@
-# Enabled bash completion mode
+export ZSH=/Users/karnold/.oh-my-zsh
+
+ZSH_THEME="robbyrussell"
+
+
+# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
+# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+# Example format: plugins=(rails git textmate ruby lighthouse)
+# Add wisely, as too many plugins slow down shell startup.
+plugins=(
+  git
+  docker
+  tmux
+)
+#zsh specific settings
+bindkey -e
+
+# ---------- zsh setup
+# autoload -U compinit && compinit
+
+
+source $ZSH/oh-my-zsh.sh
+
+# User configuration
+#
+# # Enabled bash completion mode
 autoload bashcompinit
 bashcompinit
 
@@ -24,10 +49,6 @@ alias vim="nvim"
 alias mux="tmuxinator"
 alias tma='tmux attach -t $1'
 alias tl='tmux ls'
-#if [ -f ~/.config/completions/tmux_completion.zsh ]; then
-#. ~/.config/completions/tmux_completion.sh
-#fi
-
 
 # ----------- Alias project settings
 alias tidbits="cd ~/Code/Projects/tidbits"
@@ -71,22 +92,4 @@ source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 if [ -f /Users/karnold/.tnsrc ]; then
     source /Users/karnold/.tnsrc
 fi
-
-
-#zsh specific settings
-bindkey -e
-
-
-# ---------- zsh setup
-autoload -U compinit && compinit
-plugins=(
-  git
-  osx
-  docker
-  tmux
-  tmuxinator
-  web-search
-)
-
-ZSH_THEME=""
 
