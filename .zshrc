@@ -28,6 +28,7 @@ autoload bashcompinit
 bashcompinit
 
 # ---------- Path exports
+export PATH=$PATH:/usr/local/bin
 export PATH=$PATH:/Users/karnold/Library/Python/3.6/bin
 export PATH=$PATH:~/Tools/flutter/bin
 export ANDROID_HOME=/usr/local/Caskroom/android-sdk/3859397,26.0.1

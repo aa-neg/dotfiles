@@ -58,14 +58,14 @@ let g:gruvbox_sign_column = 'none'                                              
 
 set termguicolors
 set title                                                                       "change the terminal's title
-set number                                                                      "Line numbers are good
+"set number                                                                      "Line numbers are good
 " set relativenumber                                                              "Show numbers relative to current line
 set history=500                                                                 "Store lots of :cmdline history
 set showcmd                                                                     "Show incomplete cmds down the bottom
 set noshowmode                                                                  "Hide showmode because of the powerline plugin
 set gdefault                                                                    "Set global flag for search and replace
 set guicursor=a:blinkon500-blinkwait500-blinkoff500                             "Set cursor blinking rate
-set cursorline                                                                  "Highlight current line
+"set cursorline                                                                  "Highlight current line
 set smartcase                                                                   "Smart case search if there is uppercase
 set ignorecase                                                                  "case insensitive search
 set mouse=a                                                                     "Enable mouse usage
@@ -78,7 +78,7 @@ set linebreak                                                                   
 set listchars=tab:\ \ ,trail:·                                                  "Set trails for tabs and spaces
 set list                                                                        "Enable listchars
 set lazyredraw                                                                  "Do not redraw on registers and macros
-set background=dark                                                             "Set background to dark
+"set background=dark                                                             "Set background to dark
 set hidden                                                                      "Hide buffers in background
 set conceallevel=2 concealcursor=i                                              "neosnippets conceal marker
 set splitright                                                                  "Set up new vertical splits positions
@@ -95,6 +95,14 @@ set updatetime=500                                                              
 set synmaxcol=300                                                               "Use syntax highlighting only for 300 columns
 
 silent! colorscheme oceanicNext
+hi Normal guibg=NONE ctermbg=NONE
+hi Conceal ctermbg=NONE guibg=NONE
+hi CursorLine ctermbg=NONE guibg=NONE
+hi NonText ctermbg=NONE guibg=NONE
+hi SpecialKey ctermbg=NONE guibg=NONE
+"hi Normal ctermbg=NONE guibg=NONE ctermfg=NONE guifg=NONE
+"hi! NonText ctermbg=NONE guibg=NONE ctermfg=NONE guifg=NONE
+
 " hi link jsFuncCall GruvboxBlue
 
 " }}}
@@ -371,6 +379,7 @@ nnoremap <leader><tab> <c-^>
 
 " Filesearch plugin map for searching in whole folder
 nnoremap <Leader>f :call Search()<CR>
+
 nnoremap <Leader>F :call Search(1)<CR>
 
 
@@ -409,6 +418,7 @@ nnoremap <Leader>db :silent w <BAR> :silent %bd <BAR> e#<CR>
 " }}}
 " ================ Plugins setups ======================== {{{
 
+let g:ctrlsf_default_root = 'project'
 let g:vue_disable_pre_processors=1 " slows down all the stupid preprocessors
 
 let g:ctrlsf_auto_close = 0                                                     "Do not close search when file is opened
