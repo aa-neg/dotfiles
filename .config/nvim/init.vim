@@ -18,11 +18,8 @@ Plug 'sheerun/vim-polyglot'
 Plug 'Shougo/deoplete.nvim'
 Plug 'Shougo/neosnippet'
 Plug 'brooth/far.vim'
-Plug 'dyng/ctrlsf.vim'
 Plug 'vimwiki/vimwiki'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-Plug 'junegunn/fzf.vim'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'kristijanhusak/vim-js-file-import'
 Plug 'FooSoft/vim-argwrap'
@@ -30,10 +27,13 @@ Plug 'morhetz/gruvbox'
 Plug 'Quramy/tsuquyomi'
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'othree/html5.vim'
-Plug 'othree/yajs.vim'
+"Plug 'othree/yajs.vim'
+Plug 'pangloss/vim-javascript'
+Plug 'maxmellon/vim-jsx-pretty'
 Plug 'posva/vim-vue'
 Plug 'mhartington/oceanic-next'
 Plug 'lifepillar/vim-solarized8'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'Shougo/vimproc.vim', {
 \ 'build' : {
 \     'windows' : 'tools\\update-dll-mingw',
@@ -58,7 +58,7 @@ let g:gruvbox_sign_column = 'none'                                              
 
 set termguicolors
 set title                                                                       "change the terminal's title
-"set number                                                                      "Line numbers are good
+set number                                                                      "Line numbers are good
 " set relativenumber                                                              "Show numbers relative to current line
 set history=500                                                                 "Store lots of :cmdline history
 set showcmd                                                                     "Show incomplete cmds down the bottom
@@ -225,15 +225,6 @@ function! StripTrailingWhitespaces()
   endif
 endfunction
 
-function! Search(...)
-  let l:default = a:0 > 0 ? expand('<cword>') : ''
-  let l:term = input('Search for: ', l:default)
-  if l:term !=? ''
-    let l:path = input('Path: ', '', 'file')
-    execute 'CtrlSF "'.l:term.'" '.l:path
-  endif
-endfunction
-
 function! AleStatusline(type)
   let l:count = ale#statusline#Count(bufnr(''))
   if a:type ==? 'error' && l:count['error']
@@ -378,16 +369,14 @@ nnoremap <Leader>n :NERDTreeToggle<CR>
 nnoremap <leader><tab> <c-^>
 
 " Filesearch plugin map for searching in whole folder
-nnoremap <Leader>f :call Search()<CR>
-
-nnoremap <Leader>F :call Search(1)<CR>
-
+nnoremap <leader>f :F
 
 " Toggle buffer list
-nnoremap <C-p> :Files<CR>
-nnoremap <Leader>b :Buffers<CR>
-nnoremap <Leader>t :BTags<CR>
-nnoremap <Leader>m :History<CR>
+"nnoremap <C-p> :Files<CR>
+nnoremap <C-p> :CtrlP<CR>
+"nnoremap <Leader>b :Buffers<CR>
+"nnoremap <Leader>t :BTags<CR>
+"nnoremap <Leader>m :History<CR>
 
 " Indenting in visual mode
 xnoremap <s-tab> <gv
@@ -421,9 +410,6 @@ nnoremap <Leader>db :silent w <BAR> :silent %bd <BAR> e#<CR>
 let g:ctrlsf_default_root = 'project'
 let g:vue_disable_pre_processors=1 " slows down all the stupid preprocessors
 
-let g:ctrlsf_auto_close = 0                                                     "Do not close search when file is opened
-let g:ctrlsf_mapping = {'vsplit': 's'}                                          "Mapping for opening search result in vertical split
-
 let g:NERDTreeChDirMode = 2                                                     "Always change the root directory
 let g:NERDTreeMinimalUI = 1                                                     "Disable help text and bookmark title
 let g:NERDTreeShowHidden = 1                                                    "Show hidden files in NERDTree
@@ -445,6 +431,9 @@ let g:deoplete#enable_camel_case = 1                                            
 
 let g:delimitMate_expand_cr = 1                                                 "Auto indent on enter
 
+let g:ctrlp_working_path_mode = 'wa'
+let g:ctrlp_switch_buffer = 'Et'
+
 let g:ale_completion_enabled = 1
 let g:ale_linters = {'javascript': ['eslint']}                                  "Lint js with eslint
 let g:ale_fixers = {
@@ -457,6 +446,8 @@ let g:ale_sign_warning = '⚠'                                                  
 
 " let g:jsx_ext_required = 1                                                      "Force jsx extension for jsx filetype
 let g:javascript_plugin_jsdoc = 1                                               "Enable syntax highlighting for js doc blocks
+
+let g:far#source = 'agnvim'
 
 call SetupDiffColor()
 
