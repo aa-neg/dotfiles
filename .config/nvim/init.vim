@@ -4,7 +4,6 @@ call plug#begin( '~/.config/nvim/bundle')
 Plug 'w0rp/ale', { 'do': 'npm install -g prettier' }
 Plug 'nelstrom/vim-visual-star-search'
 Plug 'Raimondi/delimitMate'
-Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'javascript.jsx'] }
 Plug 'manasthakur/vim-commentor'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
@@ -13,26 +12,37 @@ Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/nerdtree'
 Plug 'Yggdroot/indentLine'
 Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'gregsexton/MatchTag', { 'for': ['html', 'javascript.jsx'] }
 Plug 'sheerun/vim-polyglot'
-Plug 'Shougo/deoplete.nvim'
+"Plug 'Shougo/deoplete.nvim'
 Plug 'Shougo/neosnippet'
 Plug 'brooth/far.vim'
 Plug 'vimwiki/vimwiki'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'ludovicchabant/vim-gutentags'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug '/usr/local/opt/fzf'
+Plug 'junegunn/fzf.vim'
+
 Plug 'kristijanhusak/vim-js-file-import'
+Plug 'gregsexton/MatchTag', { 'for': ['html', 'javascript.jsx'] }
 Plug 'FooSoft/vim-argwrap'
-Plug 'morhetz/gruvbox'
+
+" Color themes
+"Plug 'morhetz/gruvbox'
+Plug 'KeitaNakamura/neodark.vim'
+Plug 'mhartington/oceanic-next'
+Plug 'lifepillar/vim-solarized8'
+
+" Syntax langauge stuff
 Plug 'Quramy/tsuquyomi'
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'othree/html5.vim'
-"Plug 'othree/yajs.vim'
-Plug 'pangloss/vim-javascript'
+Plug 'othree/yajs.vim'
+Plug 'dart-lang/dart-vim-plugin'
 Plug 'maxmellon/vim-jsx-pretty'
 Plug 'posva/vim-vue'
-Plug 'mhartington/oceanic-next'
-Plug 'lifepillar/vim-solarized8'
+Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'javascript.jsx'] }
+
+
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'Shougo/vimproc.vim', {
 \ 'build' : {
@@ -76,6 +86,7 @@ set fileencoding=utf-8                                                          
 set wrap                                                                        "Enable word wrap
 set linebreak                                                                   "Wrap lines at convenient points
 set listchars=tab:\ \ ,trail:·                                                  "Set trails for tabs and spaces
+set tabstop=2
 set list                                                                        "Enable listchars
 set lazyredraw                                                                  "Do not redraw on registers and macros
 "set background=dark                                                             "Set background to dark
@@ -94,7 +105,10 @@ set tagcase=smart                                                               
 set updatetime=500                                                              "Cursor hold timeout
 set synmaxcol=300                                                               "Use syntax highlighting only for 300 columns
 
-silent! colorscheme oceanicNext
+"silent! colorscheme oceanicNext
+silent! colorscheme neodark
+let g:neodark#terminal_transparent = 1
+"colorscheme onehalfdark
 hi Normal guibg=NONE ctermbg=NONE
 hi Conceal ctermbg=NONE guibg=NONE
 hi CursorLine ctermbg=NONE guibg=NONE
@@ -129,7 +143,7 @@ set tabstop=2
 set expandtab
 set breakindent
 set smartindent
-set colorcolumn=80
+"set colorcolumn=80
 " set nofoldenable
 " set foldmethod=syntax
 
@@ -195,7 +209,7 @@ set statusline+=\ \│\ %y                                                      
 " set statusline+=\ \│\ %p%%                                                      "Percentage
 set statusline+=\ \│\ %c                                                        "Column number
 set statusline+=\ \│\ %l/%L                                                     "Current line number/Total line numbers
-set statusline+=\ %{gutentags#statusline('\│\ ')}                               "Tags status
+"set statusline+=\ %{gutentags#statusline('\│\ ')}                               "Tags status
 set statusline+=\ %2*%{AleStatusline('error')}%*                                "Errors count
 set statusline+=%3*%{AleStatusline('warning')}%*                                "Warning count
 
@@ -373,8 +387,8 @@ nnoremap <leader>f :F
 
 " Toggle buffer list
 "nnoremap <C-p> :Files<CR>
-nnoremap <C-p> :CtrlP<CR>
-"nnoremap <Leader>b :Buffers<CR>
+nnoremap <C-p> :CtrlPMixed<CR>
+nnoremap <Leader>b :CtrlPBuffer<CR>
 "nnoremap <Leader>t :BTags<CR>
 "nnoremap <Leader>m :History<CR>
 
@@ -423,11 +437,16 @@ let g:polyglot_disabled = ['javascript', 'typescript', 'css']
 let g:neosnippet#disable_runtime_snippets = {'_' : 1}                           "Snippets setup
 let g:neosnippet#snippets_directory = ['~/.config/nvim/snippets']               "Snippets directory
 
-let g:deoplete#enable_at_startup = 1                                            "Enable deoplete autocompletion
-let g:deoplete#file#enable_buffer_path = 1                                      "Autocomplete files relative to current buffer
-let g:deoplete#tag#cache_limit_size = 20000000                                  "Allow tags file up to ~20 MB
-let g:deoplete#max_list = 30                                                    "Show maximum of 30 entries in autocomplete popup
-let g:deoplete#enable_camel_case = 1                                            "Enable camel case completion
+
+"Coc settings
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
 
 let g:delimitMate_expand_cr = 1                                                 "Auto indent on enter
 
@@ -435,19 +454,28 @@ let g:ctrlp_working_path_mode = 'wa'
 let g:ctrlp_switch_buffer = 'Et'
 
 let g:ale_completion_enabled = 1
-let g:ale_linters = {'javascript': ['eslint']}                                  "Lint js with eslint
+let g:ale_linters = {'javascript': ['prettier']}                                  "Lint js with eslint
 let g:ale_fixers = {
-\  'javascript': ['prettier', 'eslint'],
+\  'javascript': ['prettier'],
 \  'typescript': ['prettier']
 \}                       "Fix eslint errors
 let g:ale_javascript_prettier_options = '--print-width 100'                     "Set max width to 100 chars for prettier
 let g:ale_sign_error = '✖'                                                      "Lint error sign
 let g:ale_sign_warning = '⚠'                                                    "Lint warning sign
 
-" let g:jsx_ext_required = 1                                                      "Force jsx extension for jsx filetype
+ let g:jsx_ext_required = 1                                                      "Force jsx extension for jsx filetype
 let g:javascript_plugin_jsdoc = 1                                               "Enable syntax highlighting for js doc blocks
 
 let g:far#source = 'agnvim'
+
+let g:far#sources = {
+    \   'ag': {
+    \       'args': {
+    \           'cmd': ['ag', '--nogroup', '--column', '--nocolor', '--silent',
+    \                   '--max-count={limit}', '{pattern}',
+    \                   '--file-search-regex={file_mask}',
+    \                   '--ignore=node_modules']
+    \       }}}
 
 call SetupDiffColor()
 
