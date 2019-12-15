@@ -12,15 +12,16 @@ Plug 'airblade/vim-gitgutter'
 Plug 'scrooloose/nerdtree'
 Plug 'Yggdroot/indentLine'
 Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'sheerun/vim-polyglot'
-"Plug 'Shougo/deoplete.nvim'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'Shougo/neosnippet'
-Plug 'brooth/far.vim'
 Plug 'vimwiki/vimwiki'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Search and replace business
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
+Plug 'brooth/far.vim'
+Plug 'liuchengxu/vim-clap'
 
 Plug 'kristijanhusak/vim-js-file-import'
 Plug 'gregsexton/MatchTag', { 'for': ['html', 'javascript.jsx'] }
@@ -28,6 +29,7 @@ Plug 'FooSoft/vim-argwrap'
 
 " Color themes
 "Plug 'morhetz/gruvbox'
+Plug 'sonph/onehalf'
 Plug 'KeitaNakamura/neodark.vim'
 Plug 'mhartington/oceanic-next'
 Plug 'lifepillar/vim-solarized8'
@@ -43,7 +45,6 @@ Plug 'posva/vim-vue'
 Plug 'mattn/emmet-vim', { 'for': ['html', 'css', 'javascript.jsx'] }
 
 
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'Shougo/vimproc.vim', {
 \ 'build' : {
 \     'windows' : 'tools\\update-dll-mingw',
@@ -54,11 +55,14 @@ Plug 'Shougo/vimproc.vim', {
 \    },
 \ }
 
+
 call plug#end()
 "}}}
 " ================ General Config ==================== {{{
 "
 set spell
+
+filetype plugin on
 
 let g:mapleader = ','                                                           "Change leader to a comma
 
@@ -66,7 +70,7 @@ let g:gruvbox_italic = 1                                                        
 let g:gruvbox_invert_selection = 0                                              "Do not invert highlighing on selection
 let g:gruvbox_sign_column = 'none'                                              "Do not use background for sign column
 
-set termguicolors
+"set termguicolors
 set title                                                                       "change the terminal's title
 set number                                                                      "Line numbers are good
 " set relativenumber                                                              "Show numbers relative to current line
@@ -107,8 +111,8 @@ set synmaxcol=300                                                               
 
 "silent! colorscheme oceanicNext
 silent! colorscheme neodark
-let g:neodark#terminal_transparent = 1
-"colorscheme onehalfdark
+"let g:neodark#terminal_transparent = 1
+"silent! colorscheme onehalfdark
 hi Normal guibg=NONE ctermbg=NONE
 hi Conceal ctermbg=NONE guibg=NONE
 hi CursorLine ctermbg=NONE guibg=NONE
@@ -383,12 +387,11 @@ nnoremap <Leader>n :NERDTreeToggle<CR>
 nnoremap <leader><tab> <c-^>
 
 " Filesearch plugin map for searching in whole folder
-nnoremap <leader>f :F
+"nnoremap <leader>f :F
+nnoremap <leader>f :Clap grep<CR>
 
 " Toggle buffer list
-"nnoremap <C-p> :Files<CR>
-nnoremap <C-p> :CtrlPMixed<CR>
-nnoremap <Leader>b :CtrlPBuffer<CR>
+nnoremap <C-p> :Clap files<CR>
 "nnoremap <Leader>t :BTags<CR>
 "nnoremap <Leader>m :History<CR>
 
@@ -417,6 +420,8 @@ nnoremap <leader>r :ArgWrap<CR>
 
 " Close all other buffers except current one
 nnoremap <Leader>db :silent w <BAR> :silent %bd <BAR> e#<CR>
+
+let g:ale_fixers = {'css': ['prettier'], 'html': ['prettier'], 'tsx': ['prettier'], 'ts': ['prettier']}
 
 " }}}
 " ================ Plugins setups ======================== {{{
@@ -450,11 +455,9 @@ nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 let g:delimitMate_expand_cr = 1                                                 "Auto indent on enter
 
-let g:ctrlp_working_path_mode = 'wa'
-let g:ctrlp_switch_buffer = 'Et'
-
 let g:ale_completion_enabled = 1
-let g:ale_linters = {'javascript': ['prettier']}                                  "Lint js with eslint
+let g:ale_linter_aliases = {'typescriptreact': 'typescript'}
+let g:ale_linters = {'javascript': ['prettier'], 'typescript': ['prettier']}
 let g:ale_fixers = {
 \  'javascript': ['prettier'],
 \  'typescript': ['prettier']
@@ -476,6 +479,16 @@ let g:far#sources = {
     \                   '--file-search-regex={file_mask}',
     \                   '--ignore=node_modules']
     \       }}}
+
+
+
+
+
+
+
+
+
+
 
 call SetupDiffColor()
 

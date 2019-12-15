@@ -4,12 +4,15 @@
 # Path to your oh-my-zsh installation.
 export ZSH=/Users/karnold/.oh-my-zsh
 
+export FZF_BASE=/usr/local/bin/fzf
+
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="philips"
 
 source ~/.zshrc.pre-oh-my-zsh
+source ~/.bash_profile
 
 
 # Set list of themes to load
@@ -95,3 +98,27 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[[ -f /Users/karnold/Code/Siteminder/hackathon/lh-alexa/little-hotelier/functions/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/karnold/Code/Siteminder/hackathon/lh-alexa/little-hotelier/functions/node_modules/tabtab/.completions/serverless.zsh
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[[ -f /Users/karnold/Code/Siteminder/hackathon/lh-alexa/little-hotelier/functions/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/karnold/Code/Siteminder/hackathon/lh-alexa/little-hotelier/functions/node_modules/tabtab/.completions/sls.zsh
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/karnold/Downloads/google-cloud-sdk/path.zsh.inc' ]; then source '/Users/karnold/Downloads/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/karnold/Downloads/google-cloud-sdk/completion.zsh.inc' ]; then source '/Users/karnold/Downloads/google-cloud-sdk/completion.zsh.inc'; fi
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# tabtab source for slss package
+# uninstall by removing these lines or running `tabtab uninstall slss`
+[[ -f /Users/karnold/Code/Projects/scrapers/lambdas/node_modules/tabtab/.completions/slss.zsh ]] && . /Users/karnold/Code/Projects/scrapers/lambdas/node_modules/tabtab/.completions/slss.zshexport PATH="/usr/local/opt/icu4c/bin:$PATH"
+
+###-tns-completion-start-###
+if [ -f /Users/karnold/.tnsrc ]; then 
+    source /Users/karnold/.tnsrc 
+fi
+###-tns-completion-end-###
